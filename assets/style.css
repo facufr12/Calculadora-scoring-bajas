@@ -1,0 +1,85 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 40px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+}
+label {
+  font-weight: 700;
+}
+
+select,
+input {
+  display: block;
+  width: 95%;
+
+  margin-top: 7px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+select,
+button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+button {
+  background-color: gray;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: gray;
+}
+
+.radio-group,
+.age-group {
+  display: flex;
+  justify-content: space-around;
+
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.radio-group label,
+.age-group label {
+  width: auto;
+  margin-right: 10px;
+}
+input[type="radio"] {
+  width: 25px;
+  margin-right: 10px;
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 1.2em;
+  text-align: center;
+}
+div {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+img {
+  width: 40%;
+  height: auto; /* Mantiene la proporción de la imagen */
+  display: block; /* Para que se trate como un bloque */
+  margin: 0 auto; /* Centra la imagen */
+}

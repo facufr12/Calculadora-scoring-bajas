@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora de Scoring</title>
+    <link rel="icon" href="/assets/images/grupocober.png" type="image/x-icon" /> <!-- Agrega el favicon aquí -->
+    <link rel="stylesheet" href="/assets/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <img src="./assets/images/grupocober.png" alt="Grupo Cober" />
+      <h1>Calculadora de Scoring</h1>
+      <form id="scoringForm">
+        <label for="pathology">Patología</label>
+        <select id="pathology" name="pathology">
+          <option value="">Seleccionar</option>
+          <option value="artritis">Artritis Rematoidea</option>
+          <option value="celiaquia">Celiaquía</option>
+          <option value="cud">CUD</option>
+          <option value="diabetes">Diabetes tipo 1</option>
+          <option value="epilepsia">Epilepsia</option>
+          <option value="oncológicas">Enfermedades Oncológicas</option>
+          <option value="cardiacas">Enfermedades Cardiacas</option>
+          <option value="neurologicos">Estudios neurológicos en pediátricos</option>
+          <option value="hiv">HIV</option>
+          <option value="obesidad">Obesidad</option>
+          <option value="judicializados">Judicializados</option>
+          <option value="osteoporosis">Osteoporosis</option>
+          <option value="psiquiatrico">Pacientes psiquiátricos</option>
+          <option value="sin_patología">Sin Patología</option>
+          <option value="trasplantados">Trasplantados</option>
+        </select>
+
+        <div class="radio-group">
+          <label>Último año</label>
+          <label>
+            <input type="radio" id="consumption_yes" name="consumption" value="yes" />
+            Con consumo
+          </label>
+          <label>
+            <input type="radio" id="consumption_no" name="consumption" value="no" />
+            Sin consumo
+          </label>
+        </div>
+
+        <div>
+          <label for="capitas">Cápitas</label>
+          <input type="number" id="capitas" name="capitas" min="1" required />
+        </div>
+
+        <div class="age-group">
+          <label>Rango Etario</label>
+          <label>
+            <input type="radio" id="age_under" name="ageRange" value="under65" />
+            Menores de 65
+          </label>
+          <label>
+            <input type="radio" id="age_over" name="ageRange" value="over65" />
+            Mayores de 65
+          </label>
+        </div>
+
+        <button type="button" onclick="calculateResult()">Calcular</button>
+      </form>
+
+      <div id="result"></div>
+    </div>
+
+    <script src="./assets/script.js"></script>
+  </body>
+</html>
