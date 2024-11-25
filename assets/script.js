@@ -42,24 +42,21 @@ else if (pathology === "celiaquia") {
   
 
   // Condiciones para estudios neurológicos en pediátricos
-  else if (pathology === "neurologicos") {
-    if (consumption === "no") {
-      if (capitas >= 2 && ageRange === "under65") {
-        result = "Consultar con Fidelización"; // Estudios neurológicos, sin consumo, 2 o más cápitas, menor de 65
+  // Condiciones para estudios neurológicos en pediátricos
+else if (pathology === "neurologicos") {
+  if (consumption === "no") {
+      if (capitas === 1 || capitas === 2) {
+          result = "Consultar con Fidelización"; // Estudios neurológicos, sin consumo, 1 o 2 cápitas, menor de 65
       } else if (capitas >= 2 && ageRange === "over65") {
-        result = "GC"; // Estudios neurológicos, sin consumo, 2 o más cápitas, mayor de 65
-      } else if (capitas === 1 && ageRange === "under65") {
-        result = "GC"; // Estudios neurológicos, sin consumo, 1 cápita, menor de 65
-      } else if (capitas === 1 && ageRange === "over65") {
-        result = "GC"; // Estudios neurológicos, sin consumo, 1 cápita, mayor de 65
+          result = "GC"; // Estudios neurológicos, sin consumo, 2 o más cápitas, mayor de 65
       }
-    } else {
+  } else {
       // Con consumo
       if (capitas >= 1) {
-        result = "GM"; // Estudios neurológicos, con consumo, 1 o más cápitas
+          result = "GM"; // Estudios neurológicos, con consumo, 1 o más cápitas
       }
-    }
   }
+}
 
   // Condiciones para enfermedades cardíacas
   else if (pathology === "cardiacas") {
@@ -111,14 +108,14 @@ else if (pathology === "celiaquia") {
       result = "GM"; // Osteoporosis, con consumo, 1 cápita, mayor de 65
     }
   }
-  else if (pathology === "judicializados") {
-    if (consumption === "yes" && capitas === 1 && ageRange === "over65") {
-      result = "GC"; // Judicializados, con consumo, 1 cápita, mayor de 65
-    } else {
+// Judicializados
+else if (pathology === "judicializados") {
+  if (consumption === "yes" && capitas === 1 && ageRange === "over65") {
+      result = "GM"; // Judicializados, con consumo, 1 cápita, mayor de 65
+  } else {
       result = "GM"; // En todas las combinaciones con Judicializados debe ser GM
-    }
   }
-  
+}
   // Otras patologías
   else if (
     ["diabetes", "oncológicas", "trasplantados", "artritis", "hiv"].includes(
