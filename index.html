@@ -15,9 +15,9 @@
         <label for="pathology">Patología</label>
         <select id="pathology" name="pathology">
           <option value="">Seleccionar</option>
-          <option value="artritis">Artritis Rematoidea</option>
           <option value="celiaquia">Celiaquía</option>
-          <option value="cud">CUD</option>
+          <option value="artritis">Artritis Rematoidea</option>
+          <option value="CUD">CUD</option>
           <option value="diabetes">Diabetes tipo 1</option>
           <option value="epilepsia">Epilepsia</option>
           <option value="oncológicas">Enfermedades Oncológicas</option>
@@ -31,42 +31,90 @@
           <option value="sin_patología">Sin Patología</option>
           <option value="trasplantados">Trasplantados</option>
         </select>
-
+      
         <div class="radio-group">
           <label>Último año</label>
           <label>
-            <input type="radio" id="consumption_yes" name="consumption" value="yes" />
+            <input type="radio" id="consumption" name="consumption" value="conconsumo" />
             Con consumo
           </label>
           <label>
-            <input type="radio" id="consumption_no" name="consumption" value="no" />
+            <input type="radio" id="consumption" name="consumption" value="sinconsumo" />
             Sin consumo
           </label>
         </div>
-
+      
         <div>
           <label for="capitas">Cápitas</label>
           <input type="number" id="capitas" name="capitas" min="1" required />
         </div>
-
+      
         <div class="age-group">
           <label>Rango Etario</label>
           <label>
-            <input type="radio" id="age_under" name="ageRange" value="under65" />
+            <input type="radio" id="ageRange" name="ageRange" value="menores65" />
             Menores de 65
           </label>
           <label>
-            <input type="radio" id="age_over" name="ageRange" value="over65" />
+            <input type="radio" id="ageRange" name="ageRange" value="mayores65" />
             Mayores de 65
           </label>
         </div>
-
+      
         <button type="button" onclick="calculateResult()">Calcular</button>
       </form>
-
-      <div id="result"></div>
-    </div>
-
-    <script src="./assets/script.js"></script>
+      
+      <h1 id="result"></h1>
+      
+   
+      <script>
+        const apiUrl = 'https://script.google.com/macros/s/AKfycbxvXvubY6xWlVhJwm9YbpacY6JNl2BEMF39sewWod-ljXO7LLC0wsV-bQs4R6fQjlxrXg/exec'; // URL de tu Apps Script
+      
+        async function calculateResult() {
+          const pathology = document.getElementById('pathology').value;
+          const consumption = document.querySelector('input[name="consumption"]:checked')?.value;
+          const capitas = document.getElementById('capitas').value;
+          const ageRange = document.querySelector('input[name="ageRange"]:checked')?.value;
+      
+          if (!pathology || !consumption || !capitas || !ageRange) {
+            alert("Por favor, completa todos los campos.");
+            return;
+          }
+      
+          // Construir el objeto con los parámetros
+          const params = {
+            pathology,
+            consumption,
+            capitas,
+            ageRange
+          };
+      
+          try {
+            // Hacer la solicitud al servidor de Apps Script (usando POST)
+            const response = await fetch(apiUrl, {
+              method: 'POST', // Asegúrate de usar POST
+            
+              body: JSON.stringify(params) // Convierte los datos a JSON
+            });
+      
+            const data = await response.json();
+      
+            if (data.status === 'success') {
+              let resultHTML = "<h3></h3>";
+              data.rows.forEach(row => {
+                resultHTML += `<p>Resultado: ${row.result}</p>`; // Solo muestra el "result"
+              });
+              document.getElementById("result").innerHTML = resultHTML;
+            } else {
+              document.getElementById("result").innerText = `Error: ${data.message}`;
+            }
+          } catch (error) {
+            console.error("Error al obtener el resultado:", error);
+            document.getElementById("result").innerText = "Ocurrió un error. Intenta nuevamente.";
+          }
+        }
+      </script>
+      
+      
   </body>
 </html>
